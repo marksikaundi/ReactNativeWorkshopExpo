@@ -1,20 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Text, View, Switch } from 'react-native';
+import styles from './styles';
 
 export default function App() {
+  const [location,setLocation] = useState(false)
+  const [mic,setMic] = useState(false)
+  const [storage,setStorage] = useState(false)
+
+  const toggleLocation = () => {
+    setLocation(previousState=>!previousState)
+  }
+  const toggleMic = () => {
+    setMic(previousState=>!previousState)
+  }
+  const toggleStorage = () => {
+    setStorage(previousState=>!previousState)
+  }
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app! home</Text>
-      <StatusBar style="auto" />
+      <Text style={styles.text}>Location is {location ? "on" : "off"}</Text>
+      <Switch 
+      trackColor={{false:"red",true:"black"}}
+      thumbColor={"blue"}
+      ios_backgroundColor="red"
+      onValueChange={toggleLocation}
+      value={location}
+      />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
